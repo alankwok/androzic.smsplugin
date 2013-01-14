@@ -53,7 +53,9 @@ public class SMSReceiver extends BroadcastReceiver
 		for (int i = 0; i < pdus.length; i++)
 		{
 			SmsMessage msg = SmsMessage.createFromPdu((byte[]) pdus[i]);
-			String text = msg.getMessageBody().toString();
+			String text = msg.getMessageBody();
+			if (text == null)
+				continue;
 			if (text.contains("@"))
 			{
 				int idx = text.indexOf("@");
